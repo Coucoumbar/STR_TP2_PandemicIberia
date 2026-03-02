@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
 
 class City 
 {
@@ -18,5 +19,8 @@ public:
 
 	int total_cubes() const;
 	int cubes_of(const std::string& color) const;
+
+	//Test
+	void display();
 };
 
