@@ -125,11 +125,13 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Pandemic_Iberia.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="City.h" />
+    <ClInclude Include="Graph.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="board.txt" />
