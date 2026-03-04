@@ -13,18 +13,16 @@ class Parser
 private :
 	const std::string FILE_NAME;
 	std::ifstream file;
-	std::map<std::string, City> cities;
 	
 public :
 	Parser(const std::string&);
 
-	void parse_into();
+	bool parse_into(std::map<std::string, City>&);
 
-	void parse_cities();
+	int parse_cities(std::map<std::string, City>&);
 	const bool find_cities();
 
-	void parse_links();
-	const bool find_links();
+	int parse_links(std::map<std::string, City>&);
 
 	std::vector<std::string> split_line(std::string&, char);
 };

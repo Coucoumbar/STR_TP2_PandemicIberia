@@ -2,20 +2,44 @@
 
 Parser::Parser(const std::string& file_name) : FILE_NAME(file_name), file({ FILE_NAME }) {}
 
-void Parser::parse_into() {
-	parse_cities();
-	parse_links();
+bool Parser::parse_into(std::map<std::string, City>& cities) {
+	int cpt = 0;
+	bool success = true;
 
-	for (auto t : cities)
+	std::cout << "Chargement des villes... ";
+
+	try
 	{
-		t.second.display();
+		cpt = parse_cities(cities);
+		std::cout << cpt << " villes chargées!" << std::endl;
 	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Erreur lors du chargement des villes : " << e.what() << std::endl;
+		success = false;
+	}
+
+	std::cout << std::endl << "Chargement des liens... ";
+
+	try
+	{
+		cpt = parse_links(cities);
+		std::cout << cpt << " liens chargées!" << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Erreur lors du chargement des liens : " << e.what() << std::endl;
+		success = false;
+	}
+
+	return success;
 }
 
-void Parser::parse_cities() {
+int Parser::parse_cities(std::map<std::string, City>& cities) {
 	if (!find_cities()) throw new std::runtime_error("No city found in the file");
 
 	std::string line;
+	int cpt = 0;
 
 	while (std::getline(file, line))
 	{
@@ -26,7 +50,11 @@ void Parser::parse_cities() {
 		City temp{ values[0], values[1], (values[2] == "0") ? false : true };
 
 		cities[temp.name] = temp;
+
+		cpt++;
 	}
+
+	return cpt;
 }
 
 const bool Parser::find_cities() {
@@ -40,8 +68,9 @@ const bool Parser::find_cities() {
 	return false;
 }
 
-void Parser::parse_links() {
+int Parser::parse_links(std::map<std::string, City>& cities) {
 	std::string line;
+	int cpt = 0;
 
 	while (std::getline(file, line))
 	{
@@ -51,8 +80,11 @@ void Parser::parse_links() {
 
 			cities.at(values[0]).neighbours.push_back(values[1]);
 			cities.at(values[1]).neighbours.push_back(values[0]);
+			cpt++;
 		}
 	}
+
+	return cpt;
 }
 
 std::vector<std::string> Parser::split_line(std::string& line, char delimiter) {

@@ -18,7 +18,7 @@ public:
 	City(const std::string& name, const std::string& color, bool harbor);
 
 	int total_cubes() const;
-	int cubes_of(const std::string& color) const;
+	int total_cubes_of(const std::string& color) const;
 
 	//Test
 	void display();
