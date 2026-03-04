@@ -1,8 +1,12 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string& file_name) : FILE_NAME(file_name), file({ FILE_NAME }) {}
+Parser::Parser(const std::string& file_name, std::map<std::string, City>& target, std::map<std::string, std::vector<std::string&>>& filte) : 
+	FILE_NAME(file_name), 
+	file({ FILE_NAME }), 
+	target(target), 
+	filter(filter) {}
 
-bool Parser::parse_into(std::map<std::string, City>& cities) {
+bool Parser::process() {
 	int cpt = 0;
 	bool success = true;
 
@@ -10,7 +14,7 @@ bool Parser::parse_into(std::map<std::string, City>& cities) {
 
 	try
 	{
-		cpt = parse_cities(cities);
+		cpt = parse_cities();
 		std::cout << cpt << " villes chargées!" << std::endl;
 	}
 	catch (const std::exception& e)
@@ -23,7 +27,7 @@ bool Parser::parse_into(std::map<std::string, City>& cities) {
 
 	try
 	{
-		cpt = parse_links(cities);
+		cpt = parse_links();
 		std::cout << cpt << " liens chargées!" << std::endl;
 	}
 	catch (const std::exception& e)
@@ -35,7 +39,7 @@ bool Parser::parse_into(std::map<std::string, City>& cities) {
 	return success;
 }
 
-int Parser::parse_cities(std::map<std::string, City>& cities) {
+int Parser::parse_cities() {
 	if (!find_cities()) throw new std::runtime_error("No city found in the file");
 
 	std::string line;
@@ -49,7 +53,7 @@ int Parser::parse_cities(std::map<std::string, City>& cities) {
 
 		City temp{ values[0], values[1], (values[2] == "0") ? false : true };
 
-		cities[temp.name] = temp;
+		target[temp.name] = temp;
 
 		cpt++;
 	}
@@ -68,7 +72,7 @@ const bool Parser::find_cities() {
 	return false;
 }
 
-int Parser::parse_links(std::map<std::string, City>& cities) {
+int Parser::parse_links() {
 	std::string line;
 	int cpt = 0;
 
@@ -78,8 +82,8 @@ int Parser::parse_links(std::map<std::string, City>& cities) {
 		{
 			std::vector<std::string> values = split_line(line, ';');
 
-			cities.at(values[0]).neighbours.push_back(values[1]);
-			cities.at(values[1]).neighbours.push_back(values[0]);
+			target.at(values[0]).neighbours.push_back(values[1]);
+			target.at(values[1]).neighbours.push_back(values[0]);
 			cpt++;
 		}
 	}

@@ -4,10 +4,17 @@
 Board::Board() {}
 
 bool Board::load(const std::string& file) {
-	Parser parser{ file };
+	Parser parser{ file, cities, filtered_cities };
 
-	return parser.parse_into(cities);
+	return parser.process();
 }
+
+//std::string Board::list_cities() {
+//	for (size_t i = 0; i < length; i++)
+//	{
+//
+//	}
+//}
 
 void Board::place_three_cubes() {
 
