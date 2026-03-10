@@ -12,9 +12,10 @@ private :
 	std::map<std::string, City> cities;
 	std::map<std::string, std::vector<std::string&>> filtered_cities;
 
-	std::string& list_cities();
-	std::string& list_neighbours(const std::string&);
-	void outbreak(const std::string&);
+	//std::string& list_cities();
+	void list_cities();
+	//std::string& list_neighbours(const std::string&);
+	//void outbreak(const std::string&);
 public:
 	Board();
 	bool load(const std::string& file);

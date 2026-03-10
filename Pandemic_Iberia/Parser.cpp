@@ -55,6 +55,8 @@ int Parser::parse_cities() {
 
 		target[temp.name] = temp;
 
+		/*filter[temp.color].push_back(temp.name);*/
+
 		cpt++;
 	}
 

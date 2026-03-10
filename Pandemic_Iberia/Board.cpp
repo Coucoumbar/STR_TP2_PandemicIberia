@@ -9,12 +9,19 @@ bool Board::load(const std::string& file) {
 	return parser.process();
 }
 
-//std::string Board::list_cities() {
-//	for (size_t i = 0; i < length; i++)
-//	{
-//
-//	}
-//}
+void Board::list_cities() {
+	//for (const auto value : filtered_cities)
+	//{
+	//	std::cout << value.first << std::endl;
+
+	//	for (std::string& city : value.second)
+	//	{
+	//		std::cout << city << std::endl;
+	//	}
+	//}
+
+	//return;
+}
 
 void Board::place_three_cubes() {
 
@@ -33,7 +40,7 @@ void Board::shortest_path() {
 }
 
 void Board::state() {
-
+	list_cities();
 }
 
 void Board::menu() {
