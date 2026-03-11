@@ -1,10 +1,9 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string& file_name, std::map<std::string, City>& target, std::map<std::string, std::vector<std::string&>>& filte) : 
+Parser::Parser(const std::string& file_name, BoardMap& target) : 
 	FILE_NAME(file_name), 
 	file({ FILE_NAME }), 
-	target(target), 
-	filter(filter) {}
+	target(target) {}
 
 bool Parser::process() {
 	int cpt = 0;
@@ -51,11 +50,9 @@ int Parser::parse_cities() {
 
 		std::vector<std::string> values = split_line(line, ';');
 
-		City temp{ values[0], values[1], (values[2] == "0") ? false : true };
+		City* temp = new City{ values[0], values[1], (values[2] == "0") ? false : true };
 
-		target[temp.name] = temp;
-
-		/*filter[temp.color].push_back(temp.name);*/
+		target.add_city(*temp);
 
 		cpt++;
 	}
@@ -84,8 +81,9 @@ int Parser::parse_links() {
 		{
 			std::vector<std::string> values = split_line(line, ';');
 
-			target.at(values[0]).neighbours.push_back(values[1]);
-			target.at(values[1]).neighbours.push_back(values[0]);
+			target.find_city(values[0]).neighbours.push_back(values[1]);
+			target.find_city(values[1]).neighbours.push_back(values[0]);
+
 			cpt++;
 		}
 	}

@@ -7,6 +7,7 @@
 #include <map>
 
 #include "City.h"
+#include "BoardMap.h"
 
 class Parser
 {
@@ -14,11 +15,10 @@ private :
 	const std::string FILE_NAME;
 	std::ifstream file;
 
-	std::map<std::string, City>& target;
-	std::map<std::string, std::vector<std::string&>>& filter;
+	BoardMap& target;
 	
 public :
-	Parser(const std::string&, std::map<std::string, City>&, std::map<std::string, std::vector<std::string&>>&);
+	Parser(const std::string&, BoardMap&);
 
 	bool process();
 

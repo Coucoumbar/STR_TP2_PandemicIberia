@@ -4,31 +4,62 @@
 Board::Board() {}
 
 bool Board::load(const std::string& file) {
-	Parser parser{ file, cities, filtered_cities };
+	Parser parser{ file, map };
 
 	return parser.process();
 }
 
-void Board::list_cities() {
-	//for (const auto value : filtered_cities)
-	//{
-	//	std::cout << value.first << std::endl;
-
-	//	for (std::string& city : value.second)
-	//	{
-	//		std::cout << city << std::endl;
-	//	}
-	//}
-
-	//return;
-}
-
 void Board::place_three_cubes() {
+	map.list_cities();
 
+	int choice = 0;
+
+	do
+	{
+		std::cout << std::endl << "> Choix (0 pour annuler) : ";
+
+		if (!(std::cin >> choice) || choice < 0 || choice > 48) {
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			std::cout << "Choix invalide!" << std::endl;
+		}
+		else break;
+	} 
+	while (true);
+
+	if (choice == 0) return;
+
+	City& city = map.find_city(choice);
+
+	city.cubes[city.color] += 3;
+
+	std::cout << "  " << city.name << " +3 -> " << city.total_cubes() << " cubes total" << std::endl;
 }
 
 void Board::infect_city() {
+	map.list_cities();
 
+	int choice = 0;
+
+	do
+	{
+		std::cout << std::endl << "> Choix (0 pour annuler) : ";
+
+		if (!(std::cin >> choice) || choice < 0 || choice > 48) {
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			std::cout << "Choix invalide!" << std::endl;
+		}
+		else break;
+	} while (true);
+
+	if (choice == 0) return;
+
+	City& city = map.find_city(choice);
+
+	city.cubes[city.color] += 1;
+
+	std::cout << "  " << city.name << " +1 -> " << city.total_cubes() << " cubes total" << std::endl;
 }
 
 void Board::place_rail() {
@@ -40,7 +71,7 @@ void Board::shortest_path() {
 }
 
 void Board::state() {
-	list_cities();
+
 }
 
 void Board::menu() {

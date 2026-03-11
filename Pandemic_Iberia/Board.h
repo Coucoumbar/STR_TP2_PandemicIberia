@@ -6,15 +6,13 @@
 #include <map>
 #include <string>
 
+#include "BoardMap.h"
+
 class Board {
 private :
 	// Attributs et méthodes privées : à vous de décider
-	std::map<std::string, City> cities;
-	std::map<std::string, std::vector<std::string&>> filtered_cities;
+	BoardMap map;
 
-	//std::string& list_cities();
-	void list_cities();
-	//std::string& list_neighbours(const std::string&);
 	//void outbreak(const std::string&);
 public:
 	Board();

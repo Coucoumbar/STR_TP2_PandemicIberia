@@ -124,14 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardMap.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="Pandemic_Iberia.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardMap.h" />
     <ClInclude Include="City.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="board.txt" />
