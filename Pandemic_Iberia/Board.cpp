@@ -63,7 +63,56 @@ void Board::infect_city() {
 }
 
 void Board::place_rail() {
+	map.list_cities();
 
+	int choice = 0;
+
+	do
+	{
+		std::cout << std::endl << "> Choix (0 pour annuler) : ";
+
+		if (!(std::cin >> choice) || choice < 0 || choice > 48) {
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			std::cout << "Choix invalide!" << std::endl;
+		}
+		else break;
+	} while (true);
+
+	if (choice == 0) return;
+
+	City& first_city = map.find_city(choice);
+
+	map.list_neighbours(choice);
+
+	choice = 0;
+
+	bool valid = false;
+
+	do
+	{
+		std::cout << std::endl << "> Choix (0 pour annuler) : ";
+
+		if (!(std::cin >> choice) || choice < 0 || choice > 48) {
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			std::cout << "Choix invalide!" << std::endl;
+		}
+		else {
+			if (choice == 0) return;
+
+			for (std::string neighbour : map.find_city(choice).neighbours)
+			{
+				if (first_city.name == neighbour) valid = true;
+			}
+
+			if (!valid)
+			{
+				std::cout << "Choix invalide!" << std::endl;
+			}
+		}
+
+	} while (!valid);
 }
 
 void Board::shortest_path() {

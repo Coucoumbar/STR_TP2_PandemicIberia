@@ -18,7 +18,7 @@ City& BoardMap::find_city(std::string& name) {
 	return *cities_by_id.at(cities_by_name.at(name));
 }
 
-void BoardMap::list_cities() {
+const void BoardMap::list_cities() {
 	for (int index = 0; index < cities_by_color.size(); index++)
 	{
 		std::string color = Utils::index_to_color(index);
@@ -35,6 +35,24 @@ void BoardMap::list_cities() {
 			std::cout << "| " << city.total_cubes() << " cubes";
 			std::cout << std::endl;
 		}
+	}
+
+	Utils::text_reset();
+}
+
+const void BoardMap::list_neighbours(int target) {
+	City& city = find_city(target);
+
+	for (std::string name : city.neighbours)
+	{
+		City& neighbour = find_city(name);
+
+		Utils::text_color(neighbour.color);
+
+		std::cout << " - [" << cities_by_name.at(neighbour.name) << "] " << neighbour.name;
+		std::cout << (neighbour.harbor ? " (Ville portuaire) " : " ");
+		std::cout << "| " << neighbour.total_cubes() << " cubes";
+		std::cout << std::endl;
 	}
 
 	Utils::text_reset();

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <utility>
 
 #include "City.h"
 
@@ -13,6 +14,7 @@ private :
 	std::map<int, City*> cities_by_id;
 	std::map<std::string, int> cities_by_name;
 	std::map<std::string, std::vector<int>> cities_by_color;
+	std::vector<std::pair<int, int>> rails;
 
 public :
 	void add_city(City&);
@@ -22,7 +24,7 @@ public :
 	City& find_city(int);
 	City& find_city(std::string&);
 
-	void list_cities();
-	void list_neighbours();
+	const void list_cities();
+	const void list_neighbours(int);
 };
 
