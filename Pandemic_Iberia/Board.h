@@ -12,8 +12,13 @@ class Board {
 private :
 	// Attributs et méthodes privées : à vous de décider
 	BoardMap map;
+	int outbreaks;
 
-	//void outbreak(const std::string&);
+	int city_selection();
+	int city_selection(int);
+	void add_cubes(int, int);
+	void add_cubes(int, std::string&);
+	void outbreak(int);
 public:
 	Board();
 	bool load(const std::string& file);

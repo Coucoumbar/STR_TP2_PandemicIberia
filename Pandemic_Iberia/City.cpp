@@ -15,9 +15,6 @@ int City::total_cubes() const {
 }
 
 int City::total_cubes_of(const std::string& color) const {
-	return cubes.at(color);
-}
-
-void City::display() {
-	std::cout << name << ";" << color << ";" << harbor << std::endl;
+	try { return cubes.at(color); }
+	catch (const std::exception&) { return 0; }
 }

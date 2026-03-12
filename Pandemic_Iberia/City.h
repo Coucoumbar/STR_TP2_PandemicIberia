@@ -19,8 +19,5 @@ public:
 
 	int total_cubes() const;
 	int total_cubes_of(const std::string& color) const;
-
-	//Test
-	void display();
 };
 
